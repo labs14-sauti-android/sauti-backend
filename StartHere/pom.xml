@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lambdaschool</groupId>
-    <artifactId>authenticatedusers</artifactId>
+    <artifactId>starthere</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>authenticatedusers</name>
+    <name>StartHere</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

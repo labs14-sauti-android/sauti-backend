@@ -2,6 +2,8 @@ package com.lambdaschool.starthere.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -11,18 +13,23 @@ import java.util.List;
 
 // User is considered the parent entity
 
+@ApiModel(value = "User", description = "The User Entity")
 @Entity
 @Table(name = "users")
 public class User extends Auditable
 {
+
+    @ApiModelProperty(name = "userid", value = "Primary key for user", required =true, example ="1")
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
 
+    @ApiModelProperty(name = "username", value = "User Name", required = true, example = "Papa Smurf")
     @Column(nullable = false,
             unique = true)
     private String username;
 
+    @ApiModelProperty(name = "password", value = "Password", required = true, example = "password")
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -36,7 +43,7 @@ public class User extends Auditable
                cascade = CascadeType.ALL,
                orphanRemoval = true)
     @JsonIgnoreProperties("user")
-    private List<Quote> quotes = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
     public User()
     {
@@ -99,14 +106,14 @@ public class User extends Auditable
         this.userRoles = userRoles;
     }
 
-    public List<Quote> getQuotes()
+    public List<Question> getQuestions()
     {
-        return quotes;
+        return questions;
     }
 
-    public void setQuotes(List<Quote> quotes)
+    public void setQuestions(List<Question> questions)
     {
-        this.quotes = quotes;
+        this.questions = questions;
     }
 
     public List<SimpleGrantedAuthority> getAuthority()

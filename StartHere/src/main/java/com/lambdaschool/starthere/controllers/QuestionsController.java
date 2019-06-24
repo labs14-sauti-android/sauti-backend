@@ -38,11 +38,12 @@ public class QuestionsController
 
     @GetMapping(value = "/question/{questionsId}", produces = {"application/json"})
     public ResponseEntity<?> getQuestion(HttpServletRequest request, @PathVariable
-                                              Long quoteId)
+                                              Long questionId)
     {
         logger.trace(request.getRequestURI() + " accessed");
 
-        Question q = questionService.findQuestionById(questionsId);
+        Question q;
+        q = questionService.findQuestionById(questionId);
         return new ResponseEntity<>(q, HttpStatus.OK);
     }
 

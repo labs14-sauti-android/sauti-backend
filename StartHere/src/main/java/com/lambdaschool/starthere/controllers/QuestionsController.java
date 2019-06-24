@@ -73,7 +73,7 @@ public class QuestionsController
         URI newQuestionURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{questionid}")
-                .buildAndExpand(newQuestion.getQuestionid())
+                .buildAndExpand(newQuestion.getQuoestionsid())
                 .toUri();
         responseHeaders.setLocation(newQuestionURI);
 

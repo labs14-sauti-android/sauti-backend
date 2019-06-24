@@ -48,7 +48,7 @@ public class Question extends Auditable
 
     public void setQuestion(String quote)
     {
-        this.question = quote;
+        this.question = question;
     }
 
     public User getUser()
@@ -60,4 +60,5 @@ public class Question extends Auditable
     {
         this.user = user;
     }
+
 }

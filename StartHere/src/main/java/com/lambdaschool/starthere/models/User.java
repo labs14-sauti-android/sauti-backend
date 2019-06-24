@@ -39,6 +39,11 @@ public class User extends Auditable
             unique = false)
     private String phonenumber;
 
+    @ApiModelProperty(name = "industryType", value = "Industry Type", required = true, example = "Photography")
+    @Column(nullable = false)
+    private String industryType;
+
+
     @OneToMany(mappedBy = "user",
                cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
@@ -54,11 +59,12 @@ public class User extends Auditable
     {
     }
 
-    public User(String username, String password, String phonenumber, List<UserRoles> userRoles)
+    public User(String username, String password, String phonenumber,String industryType, List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
         setPhoneNumber(phonenumber);
+        setIndustryType(industryType);
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
@@ -108,6 +114,14 @@ public class User extends Auditable
     public void setPasswordNoEncrypt(String password)
     {
         this.password = password;
+    }
+
+    public String getIndustryType() {
+        return industryType;
+    }
+
+    public void setIndustryType(String industryType) {
+        this.industryType = industryType;
     }
 
     public List<UserRoles> getUserRoles()

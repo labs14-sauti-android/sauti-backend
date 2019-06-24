@@ -34,6 +34,11 @@ public class User extends Auditable
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @ApiModelProperty (name = "phoneNumber", value = "Phone Number", required = true, example = "555-555-5555")
+    @Column(nullable = false,
+            unique = false)
+    private String phonenumber;
+
     @OneToMany(mappedBy = "user",
                cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
@@ -49,10 +54,11 @@ public class User extends Auditable
     {
     }
 
-    public User(String username, String password, List<UserRoles> userRoles)
+    public User(String username, String password, String phonenumber, List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
+        setPhoneNumber(phonenumber);
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
@@ -68,6 +74,14 @@ public class User extends Auditable
     public void setUserid(long userid)
     {
         this.userid = userid;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhoneNumber(String phonenumber) {
+        this.phonenumber = phonenumber;
     }
 
     public String getUsername()
@@ -128,4 +142,5 @@ public class User extends Auditable
 
         return rtnList;
     }
+
 }

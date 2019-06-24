@@ -8,6 +8,8 @@ import com.twilio.type.PhoneNumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Pattern;
+
 @Service
 public class SmsSenderImpl implements SmsSender {
 
@@ -21,11 +23,20 @@ public class SmsSenderImpl implements SmsSender {
 
 //    @Override
     public void sendSms(SmsRequest smsRequest) {
+        if (isPhoneNumberValid(smsRequest.getPhoneNumber())) {
+            PhoneNumber to = new PhoneNumber(smsRequest.getPhoneNumber()),
+            PhoneNumber from = new PhoneNumber("");
+            String message = smsRequest.getMessage();
+            MessageCreator creator = Message.creator(to, from, message);
+            creator.create();
+        }else{
+            throw new IllegalArgumentException(
+                    "Phone number [" + smsRequest.getPhoneNumber() + "] is not a valid number.");
+        }
 
-                PhoneNumber to = new PhoneNumber(smsRequest.getPhoneNumber()),
-                PhoneNumber from = new PhoneNumber("");
-                String message = smsRequest.getMessage();
-        MessageCreator creator = Message.creator(to, from, message);
-
+    private boolean isPhoneNumberValid(String phoneNumber) {
+            if ()
+            @Pattern(regexp = “\\d{3}-\\d{3}-\\d{4}“, message = “Telephone is 555-555-5555”);
+        }
     }
 }

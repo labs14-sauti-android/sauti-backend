@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
 
         for (Question q : user.getQuestions())
         {
-            newUser.getQuestions().add(new Question(q.getQuote(), newUser));
+            newUser.getQuestions().add(new Question(q.getQuestion(), newUser));
         }
 
         return userrepos.save(newUser);
@@ -127,7 +127,7 @@ public class UserServiceImpl implements UserDetailsService, UserService
                 {
                     for (Question q : user.getQuestions())
                     {
-                        currentUser.getQuestions().add(new Question(q.getQuote(), currentUser));
+                        currentUser.getQuestions().add(new Question(q.getQuestion(), currentUser));
                     }
                 }
 

@@ -1,5 +1,6 @@
 package com.lambdaschool.starthere.services;
 
+import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
 import com.lambdaschool.starthere.models.Question;
 import com.lambdaschool.starthere.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service(value = "quoteService")
+@Service(value = "questionService")
 public class QuestionServiceImpl implements QuestionService
 {
     @Autowired
@@ -30,7 +30,7 @@ public class QuestionServiceImpl implements QuestionService
     public Question findQuoteById(long id)
     {
         return quoterepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+                .orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
@@ -45,12 +45,12 @@ public class QuestionServiceImpl implements QuestionService
             }
             else
             {
-                throw new EntityNotFoundException(Long.toString(id) + " " + authentication.getName());
+                throw new ResourceNotFoundException(Long.toString(id) + " " + authentication.getName());
             }
         }
         else
         {
-            throw new EntityNotFoundException(Long.toString(id));
+            throw new ResourceNotFoundException(Long.toString(id));
         }
     }
 

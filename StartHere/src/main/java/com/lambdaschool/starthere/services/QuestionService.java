@@ -8,7 +8,7 @@ public interface QuestionService
 {
     List<Question> findAll();
 
-    Question findQuoteById(long id);
+    Question findQuestionById(long id);
 
     List<Question> findByUserName(String username);
 

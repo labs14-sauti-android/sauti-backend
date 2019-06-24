@@ -34,8 +34,8 @@ public class SmsSenderImpl implements SmsSender {
                     "Phone number [" + smsRequest.getPhoneNumber() + "] is not a valid number.");
         }
 
-    private boolean isPhoneNumberValid(String phoneNumber) {
-            if ()
+    private boolean isPhoneNumberValid(String PhoneNumber) {
+
             @Pattern(regexp = “\\d{3}-\\d{3}-\\d{4}“, message = “Telephone is 555-555-5555”);
         }
     }

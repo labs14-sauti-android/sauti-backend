@@ -16,32 +16,32 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService
 {
     @Autowired
-    private QuestionRepository quoterepos;
+    private QuestionRepository questionrepos;
 
     @Override
     public List<Question> findAll()
     {
         List<Question> list = new ArrayList<>();
-        quoterepos.findAll().iterator().forEachRemaining(list::add);
+        questionrepos.findAll().iterator().forEachRemaining(list::add);
         return list;
     }
 
     @Override
-    public Question findQuoteById(long id)
+    public Question findQuestionById(long id)
     {
-        return quoterepos.findById(id)
+        return questionrepos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));
     }
 
     @Override
     public void delete(long id)
     {
-        if (quoterepos.findById(id).isPresent())
+        if (questionrepos.findById(id).isPresent())
         {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (quoterepos.findById(id).get().getUser().getUsername().equalsIgnoreCase(authentication.getName()))
+            if (questionrepos.findById(id).get().getUser().getUsername().equalsIgnoreCase(authentication.getName()))
             {
-                quoterepos.deleteById(id);
+                questionrepos.deleteById(id);
             }
             else
             {
@@ -58,14 +58,14 @@ public class QuestionServiceImpl implements QuestionService
     @Override
     public Question save(Question question)
     {
-        return quoterepos.save(question);
+        return questionrepos.save(question);
     }
 
     @Override
     public List<Question> findByUserName(String username)
     {
         List<Question> list = new ArrayList<>();
-        quoterepos.findAll().iterator().forEachRemaining(list::add);
+        questionrepos.findAll().iterator().forEachRemaining(list::add);
 
         list.removeIf(q -> !q.getUser().getUsername().equalsIgnoreCase(username));
         return list;

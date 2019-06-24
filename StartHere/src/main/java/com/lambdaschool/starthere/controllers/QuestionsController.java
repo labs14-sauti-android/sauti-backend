@@ -18,7 +18,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/quotes")
+@RequestMapping("/questions")
 public class QuestionsController
 {
     private static final Logger logger = LoggerFactory.getLogger(RolesController.class);
@@ -26,8 +26,8 @@ public class QuestionsController
     @Autowired
     QuestionService questionService;
 
-    @GetMapping(value = "/quotes", produces = {"application/json"})
-    public ResponseEntity<?> listAllQuotes(HttpServletRequest request)
+    @GetMapping(value = "/questions", produces = {"application/json"})
+    public ResponseEntity<?> listAllQuestions(HttpServletRequest request)
     {
         logger.trace(request.getRequestURI() + " accessed");
 
@@ -36,19 +36,19 @@ public class QuestionsController
     }
 
 
-    @GetMapping(value = "/quote/{quoteId}", produces = {"application/json"})
-    public ResponseEntity<?> getQuote(HttpServletRequest request, @PathVariable
+    @GetMapping(value = "/question/{questionsId}", produces = {"application/json"})
+    public ResponseEntity<?> getQuestion(HttpServletRequest request, @PathVariable
                                               Long quoteId)
     {
         logger.trace(request.getRequestURI() + " accessed");
 
-        Question q = questionService.findQuoteById(quoteId);
+        Question q = questionService.findQuestionById(questionsId);
         return new ResponseEntity<>(q, HttpStatus.OK);
     }
 
 
     @GetMapping(value = "/username/{userName}", produces = {"application/json"})
-    public ResponseEntity<?> findQuoteByUserName(HttpServletRequest request, @PathVariable
+    public ResponseEntity<?> findQuestionByUserName(HttpServletRequest request, @PathVariable
                                                          String userName)
     {
         logger.trace(request.getRequestURI() + " accessed");
@@ -59,7 +59,7 @@ public class QuestionsController
 
 
 
-    @PostMapping(value = "/quote")
+    @PostMapping(value = "/question")
     public ResponseEntity<?> addNewQuote(HttpServletRequest request, @Valid @RequestBody
             Question newQuestion) throws URISyntaxException
     {
@@ -69,19 +69,19 @@ public class QuestionsController
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();
-        URI newQuoteURI = ServletUriComponentsBuilder
+        URI newQuestionURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{quoteid}")
-                .buildAndExpand(newQuestion.getQuotesid())
+                .path("/{questionid}")
+                .buildAndExpand(newQuestion.getQuestionid())
                 .toUri();
-        responseHeaders.setLocation(newQuoteURI);
+        responseHeaders.setLocation(newQuestionURI);
 
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
     }
 
 
-    @DeleteMapping("/quote/{id}")
-    public ResponseEntity<?> deleteQuoteById(HttpServletRequest request, @PathVariable
+    @DeleteMapping("/question/{id}")
+    public ResponseEntity<?> deleteQuestionById(HttpServletRequest request, @PathVariable
                                                      long id)
     {
         logger.trace(request.getRequestURI() + " accessed");

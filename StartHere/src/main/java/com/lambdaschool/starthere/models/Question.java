@@ -31,22 +31,22 @@ public class Question extends Auditable
         this.user = user;
     }
 
-    public long getQuotesid()
+    public long getQuoestionsid()
     {
         return questionsid;
     }
 
-    public void setQuotesid(long quotesid)
+    public void setQuestionsid(long questionsid)
     {
-        this.questionsid = quotesid;
+        this.questionsid = questionsid;
     }
 
-    public String getQuote()
+    public String getQuestion()
     {
         return question;
     }
 
-    public void setQuote(String quote)
+    public void setQuestion(String quote)
     {
         this.question = quote;
     }

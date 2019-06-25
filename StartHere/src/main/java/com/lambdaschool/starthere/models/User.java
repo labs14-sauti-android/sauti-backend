@@ -24,7 +24,7 @@ public class User extends Auditable
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userid;
 
-    @ApiModelProperty(name = "username", value = "User Name", required = true, example = "Papa Smurf")
+    @ApiModelProperty(name = "username", value = "User Name", required = true, example = "John Doe")
     @Column(nullable = false,
             unique = true)
     private String username;

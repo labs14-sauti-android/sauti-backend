@@ -70,10 +70,6 @@
             <version>6.0.17.Final</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -87,13 +83,6 @@
             <artifactId>commons-pool2</artifactId>
             <version>2.6.2</version>
         </dependency>
-
-
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-validator</artifactId>-->
-<!--            <version>6.0.10.Final</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -170,8 +159,7 @@
         <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
-            <version>7.39.0</version>
-            <scope>runtime</scope>
+            <version>7.34.0</version>
         </dependency>
 
 
@@ -188,11 +176,6 @@
             <artifactId>spring-mock-mvc</artifactId>
             <version>3.3.0</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.twilio.sdk</groupId>
-            <artifactId>twilio</artifactId>
-            <version>7.39.0</version>
         </dependency>
 
         <dependency>

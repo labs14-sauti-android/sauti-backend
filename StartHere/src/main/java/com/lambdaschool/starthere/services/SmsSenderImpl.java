@@ -28,7 +28,7 @@ public class SmsSenderImpl implements SmsSender {
     public void sendSms(SmsRequest smsRequest) {
         if (isPhoneNumberValid(smsRequest.getPhoneNumber())) {
             PhoneNumber to = new PhoneNumber(smsRequest.getPhoneNumber());
-            PhoneNumber from = new PhoneNumber("");
+            PhoneNumber from = new PhoneNumber(twilioConfig.getTrialNumber());
             String message = smsRequest.getMessage();
             MessageCreator creator = Message.creator(to, from, message);
             creator.create();
@@ -37,7 +37,6 @@ public class SmsSenderImpl implements SmsSender {
             throw new IllegalArgumentException(
                     "Phone number [" + smsRequest.getPhoneNumber() + "] is not a valid number.");
         }
-
 
     }
 

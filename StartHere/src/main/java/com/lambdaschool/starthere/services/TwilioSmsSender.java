@@ -11,7 +11,7 @@ public class TwilioSmsSender {
     private final SmsSender SmsSender;
 
     @Autowired
-    public TwilioSmsSender(@Qualifier("twilio")TwilioSmsSender twilioSmsSender) {
+    public TwilioSmsSender(@Qualifier("twilio")SmsSender SmsSender) {
         this.SmsSender = SmsSender;
     }
 

@@ -39,7 +39,7 @@ public class User extends Auditable
             unique = false)
     private String phonenumber;
 
-    @ApiModelProperty(name = "industrytype", value = "Industry Type", required = true, example = "Photography")
+    @ApiModelProperty(name = "industrytype", value = "Industry Type", required = true, example = "Finance")
     @Column(nullable = false)
     private String industrytype;
 

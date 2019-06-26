@@ -41,6 +41,17 @@ public class UserServiceImpl implements UserDetailsService, UserService
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthority());
     }
 
+    public User findUserByName(String name)
+    {
+        User uname = userrepos.findByUsername(name);
+
+        if (uname == null)
+        {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return uname;
+    }
+
     public User findUserById(long id) throws ResourceNotFoundException
     {
         return userrepos.findById(id).orElseThrow(() -> new ResourceNotFoundException(Long.toString(id)));

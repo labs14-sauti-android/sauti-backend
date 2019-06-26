@@ -2,6 +2,7 @@ package com.lambdaschool.starthere.services;
 
 
 import com.lambdaschool.starthere.config.TwilioConfig;
+import com.lambdaschool.starthere.models.SmsRequest;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.rest.api.v2010.account.MessageCreator;
 import com.twilio.type.PhoneNumber;
@@ -45,6 +46,7 @@ public class SmsSenderImpl implements SmsSender {
 
 
     private boolean isPhoneNumberValid(String phoneNumber) {
+
         return true;
     }
 }

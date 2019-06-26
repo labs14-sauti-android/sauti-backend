@@ -1,6 +1,7 @@
 package com.lambdaschool.starthere.config;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,9 +10,14 @@ import org.springframework.context.annotation.Configuration;
 public class TwilioConfig {
 
 
-    private String accountSid;
-    private String authToken;
+    @Value("${twilio.trial-number.path}")
     private String trialNumber;
+
+    @Value("${twilio.auth-token}")
+    private String authToken;
+
+    @Value("${twilio.account-sid}")
+    private String accountSid;
 
     public TwilioConfig() {
     }

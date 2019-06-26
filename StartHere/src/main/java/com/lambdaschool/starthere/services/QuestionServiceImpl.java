@@ -2,8 +2,10 @@ package com.lambdaschool.starthere.services;
 
 import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
 import com.lambdaschool.starthere.models.Question;
+import com.lambdaschool.starthere.models.SmsRequest;
 import com.lambdaschool.starthere.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,14 @@ import java.util.List;
 @Service(value = "questionService")
 public class QuestionServiceImpl implements QuestionService
 {
+    @Autowired
+    private SmsSender smsSender;
+
+    @Value("${twilio.trial-number.path}")
+    private String trialNumber;
+
+
+
     @Autowired
     private QuestionRepository questionrepos;
 
@@ -58,7 +68,10 @@ public class QuestionServiceImpl implements QuestionService
     @Override
     public Question save(Question question)
     {
-        return questionrepos.save(question);
+
+        Question saveQuestion =  questionrepos.save(question);
+        smsSender.sendSms(new SmsRequest("919-438-9115", "You have a new queston on MentorMe"));
+        return saveQuestion;
     }
 
     @Override

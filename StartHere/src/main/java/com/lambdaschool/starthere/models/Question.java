@@ -31,7 +31,7 @@ public class Question extends Auditable
         this.user = user;
     }
 
-    public long getQuoestionsid()
+    public long getQuestionsid()
     {
         return questionsid;
     }
@@ -46,7 +46,7 @@ public class Question extends Auditable
         return question;
     }
 
-    public void setQuestion(String quote)
+    public void setQuestion(String question)
     {
         this.question = question;
     }

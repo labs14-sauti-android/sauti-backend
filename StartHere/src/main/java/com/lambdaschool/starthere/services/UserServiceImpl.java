@@ -4,6 +4,7 @@ import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
 import com.lambdaschool.starthere.models.Question;
 import com.lambdaschool.starthere.models.User;
 import com.lambdaschool.starthere.models.UserRoles;
+import com.lambdaschool.starthere.models.UserTypes;
 import com.lambdaschool.starthere.repository.RoleRepository;
 import com.lambdaschool.starthere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,15 @@ public class UserServiceImpl implements UserDetailsService, UserService
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setPasswordNoEncrypt(user.getPassword());
+        newUser.setPhonenumber(user.getPhonenumber());
+        newUser.setIndustrytype(user.getIndustrytype());
+
+        ArrayList<UserTypes> newUserTypes = new ArrayList<>();
+        for (UserTypes ut : user.getUserTypes())
+        {
+            newUserTypes.add(new UserTypes(newUser, ut.getType()));
+        }
+        newUser.setUserTypes(newUserTypes);
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
         for (UserRoles ur : user.getUserRoles())

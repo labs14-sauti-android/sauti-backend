@@ -39,10 +39,14 @@ public class User extends Auditable
             unique = false)
     private String phonenumber;
 
-    @ApiModelProperty(name = "industryType", value = "Industry Type", required = true, example = "Photography")
+    @ApiModelProperty(name = "industrytype", value = "Industry Type", required = true, example = "Photography")
     @Column(nullable = false)
-    private String industryType;
+    private String industrytype;
 
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<UserTypes> userTypes = new ArrayList<>();
 
     @OneToMany(mappedBy = "user",
                cascade = CascadeType.ALL)
@@ -59,12 +63,17 @@ public class User extends Auditable
     {
     }
 
-    public User(String username, String password, String phonenumber,String industryType, List<UserRoles> userRoles)
+    public User(String username, String password, String phonenumber, String industrytype, List<UserTypes> userTypes, List<UserRoles> userRoles)
     {
         setUsername(username);
         setPassword(password);
-        setPhoneNumber(phonenumber);
-        setIndustryType(industryType);
+        setPhonenumber(phonenumber);
+        setIndustrytype(industrytype);
+        this.userTypes = userTypes;
+        for (UserTypes ut : userTypes)
+        {
+            ut.setUser(this);
+        }
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
@@ -82,11 +91,12 @@ public class User extends Auditable
         this.userid = userid;
     }
 
+
     public String getPhonenumber() {
         return phonenumber;
     }
 
-    public void setPhoneNumber(String phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
 
@@ -116,12 +126,22 @@ public class User extends Auditable
         this.password = password;
     }
 
-    public String getIndustryType() {
-        return industryType;
+    public String getIndustrytype() {
+        return industrytype;
     }
 
-    public void setIndustryType(String industryType) {
-        this.industryType = industryType;
+    public void setIndustrytype(String industrytype) {
+        this.industrytype = industrytype;
+    }
+
+    public List<UserTypes> getUserTypes()
+    {
+        return userTypes;
+    }
+
+    public void setUserTypes(List<UserTypes> userTypes)
+    {
+        this.userTypes = userTypes;
     }
 
     public List<UserRoles> getUserRoles()

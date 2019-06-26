@@ -1,5 +1,5 @@
 
-     package com.lambdaschool.starthere.services;
+     package com.lambdaschool.starthere.models;
 
      import com.fasterxml.jackson.annotation.JsonProperty;
      import javax.validation.constraints.NotBlank;

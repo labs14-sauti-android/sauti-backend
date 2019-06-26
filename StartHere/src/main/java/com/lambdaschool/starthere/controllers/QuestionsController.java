@@ -61,7 +61,7 @@ public class QuestionsController
 
 
     @PostMapping(value = "/question")
-    public ResponseEntity<?> addNewQuote(HttpServletRequest request, @Valid @RequestBody
+    public ResponseEntity<?> addNewQuestion(HttpServletRequest request, @Valid @RequestBody
             Question newQuestion) throws URISyntaxException
     {
         logger.trace(request.getRequestURI() + " accessed");
@@ -73,7 +73,7 @@ public class QuestionsController
         URI newQuestionURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{questionid}")
-                .buildAndExpand(newQuestion.getQuoestionsid())
+                .buildAndExpand(newQuestion.getQuestionsid())
                 .toUri();
         responseHeaders.setLocation(newQuestionURI);
 

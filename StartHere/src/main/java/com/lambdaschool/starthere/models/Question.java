@@ -3,6 +3,8 @@ package com.lambdaschool.starthere.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "questions")
@@ -15,8 +17,10 @@ public class Question extends Auditable
     @Column(nullable = false)
     private String question;
 
-    @Column
-    private String comments;
+    @ElementCollection
+    @CollectionTable(name = "questioncomments", joinColumns = @JoinColumn(name = "questionsid"))
+    @Column(name = "comments")
+    private List<String> comments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid",
@@ -28,7 +32,12 @@ public class Question extends Auditable
     {
     }
 
-    public Question(String question, String comments, User user)
+    public Question(String question, User user) {
+        this.question = question;
+        this.user = user;
+    }
+
+    public Question(String question, List<String> comments, User user)
     {
         this.question = question;
         this.comments = comments;
@@ -55,11 +64,11 @@ public class Question extends Auditable
         this.question = question;
     }
 
-    public String getComments() {
+    public List getComments() {
         return comments;
     }
 
-    public void setComments(String comments) {
+    public void setComments(List comments) {
         this.comments = comments;
     }
 

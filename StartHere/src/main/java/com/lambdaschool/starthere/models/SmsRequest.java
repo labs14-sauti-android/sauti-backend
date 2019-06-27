@@ -7,7 +7,7 @@
      public class SmsRequest {
 
          @NotBlank
-        private final String phoneNumber;  //designation number
+        private final String phoneNumber;  //destination number
 
          @NotBlank
         private final String message;

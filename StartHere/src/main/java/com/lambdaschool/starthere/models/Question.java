@@ -15,6 +15,9 @@ public class Question extends Auditable
     @Column(nullable = false)
     private String question;
 
+    @Column
+    private String comments;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid",
                 nullable = false)
@@ -25,9 +28,10 @@ public class Question extends Auditable
     {
     }
 
-    public Question(String question, User user)
+    public Question(String question, String comments, User user)
     {
         this.question = question;
+        this.comments = comments;
         this.user = user;
     }
 
@@ -49,6 +53,14 @@ public class Question extends Auditable
     public void setQuestion(String question)
     {
         this.question = question;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public User getUser()

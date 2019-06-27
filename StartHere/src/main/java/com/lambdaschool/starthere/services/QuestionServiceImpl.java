@@ -70,7 +70,7 @@ public class QuestionServiceImpl implements QuestionService
     {
 
         Question saveQuestion =  questionrepos.save(question);
-        smsSender.sendSms(new SmsRequest("919-438-9115", "MentorMe has sent you a new qestion " + saveQuestion.getQuestion()));
+        smsSender.sendSms(new SmsRequest("919-438-9115", "MentorMe has sent you a new question " + saveQuestion.getQuestion()));
         return saveQuestion;
     }
 

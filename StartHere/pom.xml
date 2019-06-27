@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.lambdaschool</groupId>
-    <artifactId>starthere</artifactId>
+    <artifactId>mentorme</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mentorme</name>
     <description>Demo project for Spring Boot</description>
@@ -188,7 +188,7 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>${artifactId}</finalName>
 
         <plugins>
             <plugin>

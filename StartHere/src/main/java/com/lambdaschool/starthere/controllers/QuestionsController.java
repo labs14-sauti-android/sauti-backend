@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -62,11 +63,11 @@ public class QuestionsController
 
     @PostMapping(value = "/question")
     public ResponseEntity<?> addNewQuestion(HttpServletRequest request, @Valid @RequestBody
-            Question newQuestion) throws URISyntaxException
+            Question newQuestion, Authentication authentication) throws URISyntaxException
     {
         logger.trace(request.getRequestURI() + " accessed");
 
-        newQuestion = questionService.save(newQuestion);
+        newQuestion = questionService.save(newQuestion, authentication);
 
         // set the location header for the newly created resource
         HttpHeaders responseHeaders = new HttpHeaders();

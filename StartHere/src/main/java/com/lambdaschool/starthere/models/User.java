@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @Table(name = "users")
 public class User extends Auditable
 {
+
 
     @ApiModelProperty(name = "userid", value = "Primary key for user", required =true, example ="1")
     @Id

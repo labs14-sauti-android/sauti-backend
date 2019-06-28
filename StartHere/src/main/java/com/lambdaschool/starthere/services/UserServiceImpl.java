@@ -1,10 +1,7 @@
 package com.lambdaschool.starthere.services;
 
 import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
-import com.lambdaschool.starthere.models.Question;
-import com.lambdaschool.starthere.models.User;
-import com.lambdaschool.starthere.models.UserRoles;
-import com.lambdaschool.starthere.models.UserTypes;
+import com.lambdaschool.starthere.models.*;
 import com.lambdaschool.starthere.repository.RoleRepository;
 import com.lambdaschool.starthere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,8 +99,10 @@ public class UserServiceImpl implements UserDetailsService, UserService
 
         for (Question q : user.getQuestions())
         {
-            newUser.getQuestions().add(new Question(q.getQuestion(), newUser));
+            newUser.getQuestions().add(new Question(q.getQuestion(), q.getComments(), newUser));
         }
+
+
 
         return userrepos.save(newUser);
     }

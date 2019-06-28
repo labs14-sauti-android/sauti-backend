@@ -4,6 +4,7 @@ import com.lambdaschool.starthere.exceptions.ResourceNotFoundException;
 import com.lambdaschool.starthere.models.Question;
 import com.lambdaschool.starthere.models.SmsRequest;
 import com.lambdaschool.starthere.repository.QuestionRepository;
+import com.lambdaschool.starthere.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,9 @@ public class QuestionServiceImpl implements QuestionService
     @Value("${twilio.trial-number.path}")
     private String trialNumber;
 
+
+    @Autowired
+    private UserRepository userrepos;
 
 
     @Autowired
@@ -66,9 +70,9 @@ public class QuestionServiceImpl implements QuestionService
 
     @Transactional
     @Override
-    public Question save(Question question)
+    public Question save(Question question, Authentication authentication)
     {
-
+        question.setUser(userrepos.findByUsername(authentication.getName()));
         Question saveQuestion =  questionrepos.save(question);
         smsSender.sendSms(new SmsRequest("919-438-9115", "MentorMe has sent you a new question " + saveQuestion.getQuestion()));
         return saveQuestion;

@@ -17,10 +17,16 @@ public class Question extends Auditable
     @Column(nullable = false)
     private String question;
 
-    @ElementCollection
-    @CollectionTable(name = "questioncomments", joinColumns = @JoinColumn(name = "questionsid"))
-    @Column(name = "comments")
-    private List<String> comments = new ArrayList<>();
+//    @ElementCollection
+//    @CollectionTable(name = "questioncomments", joinColumns = @JoinColumn(name = "questionsid"))
+//    @Column(name = "comments")
+//    private List<String> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("question")
+    private List<Comment> comments = new ArrayList<>();
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userid",
@@ -37,7 +43,7 @@ public class Question extends Auditable
         this.user = user;
     }
 
-    public Question(String question, List<String> comments, User user)
+    public Question(String question, List<Comment> comments, User user)
     {
         this.question = question;
         this.comments = comments;
@@ -64,11 +70,11 @@ public class Question extends Auditable
         this.question = question;
     }
 
-    public List getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List comments) {
+    public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
     }
 

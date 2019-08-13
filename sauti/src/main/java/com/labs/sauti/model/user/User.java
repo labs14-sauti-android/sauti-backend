@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.labs.sauti.model.market_price.FavoriteMarketPriceSearch;
+import com.labs.sauti.model.trade_info.FavoriteTradeInfoSearch;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -35,6 +36,10 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FavoriteMarketPriceSearch> favoriteMarketPriceSearches = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<FavoriteTradeInfoSearch> favoriteTradeInfoSearches = new ArrayList<>();
 
     public User() {
     }
@@ -82,6 +87,14 @@ public class User {
 
     public void setFavoriteMarketPriceSearches(List<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
         this.favoriteMarketPriceSearches = favoriteMarketPriceSearches;
+    }
+
+    public List<FavoriteTradeInfoSearch> getFavoriteTradeInfoSearches() {
+        return favoriteTradeInfoSearches;
+    }
+
+    public void setFavoriteTradeInfoSearches(List<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
+        this.favoriteTradeInfoSearches = favoriteTradeInfoSearches;
     }
 
     @JsonIgnore

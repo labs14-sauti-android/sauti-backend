@@ -3,11 +3,13 @@ package com.labs.sauti.service;
 import com.labs.sauti.model.trade_info.FavoriteTradeInfoSearch;
 import com.labs.sauti.model.user.User;
 import com.labs.sauti.repository.FavoriteTradeInfoSearchRepository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service("favoriteTradeInfoSearchService")
 public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSearchService {
 
     private FavoriteTradeInfoSearchRepository favoriteTradeInfoSearchRepository;

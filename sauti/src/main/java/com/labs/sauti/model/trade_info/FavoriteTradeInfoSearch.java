@@ -4,11 +4,10 @@ package com.labs.sauti.model.trade_info;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.labs.sauti.model.user.User;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "favoriteTradeInfoSearches")
 public class FavoriteTradeInfoSearch {
 
     public static final String TYPE_PROCEDURE = "procedure";

@@ -35,7 +35,6 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     }
 
     @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
-    @Transactional
     public void updateExchangeRates() {
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/exchangeRates/&type=json",
@@ -57,6 +56,8 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.gc();
     }
 
     @Override

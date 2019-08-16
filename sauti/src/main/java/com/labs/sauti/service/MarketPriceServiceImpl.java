@@ -37,7 +37,6 @@ public class MarketPriceServiceImpl implements MarketPriceService {
     }
 
     @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
-    @Transactional
     public void updateMarketPrices() {
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/marketPrices/&type=json",
@@ -71,6 +70,8 @@ public class MarketPriceServiceImpl implements MarketPriceService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.gc();
     }
 
     @Override

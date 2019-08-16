@@ -16,13 +16,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("user/register")
+    @PostMapping("users")
     public ResponseEntity<User> register(@RequestBody User user) {
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @DeleteMapping("user/delete")
+    @DeleteMapping("users")
     public ResponseEntity deleteUser() {
         userService.delete();
         return new ResponseEntity(HttpStatus.OK);

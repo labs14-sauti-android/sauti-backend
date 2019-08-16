@@ -20,7 +20,7 @@ public class FavoriteMarketPriceSearchController {
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @PostMapping("favorite-market-price-search/add-all")
+    @PostMapping("favorite-market-price-searches/all")
     public ResponseEntity<List<Long>> addAllFavoriteMarketPriceSearches(
             @RequestBody ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches
     ) {
@@ -28,13 +28,13 @@ public class FavoriteMarketPriceSearchController {
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @GetMapping("favorite-market-price-search/all")
+    @GetMapping("favorite-market-price-searches")
     public ResponseEntity<List<FavoriteMarketPriceSearch>> getFavoriteMarketPriceSearches() {
         return new ResponseEntity<>(favoriteMarketPriceSearchService.getFavoriteMarketPriceSearches(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @DeleteMapping("favorite-market-price-search/delete-all")
+    @DeleteMapping("favorite-market-price-searches")
     public ResponseEntity deleteAllByIds(@RequestBody ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
         favoriteMarketPriceSearchService.deleteAllByIds(favoriteMarketPriceSearches);
         return new ResponseEntity(HttpStatus.OK);

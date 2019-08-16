@@ -1,4 +1,4 @@
-package com.labs.sauti.model.exchange_rate;
+package com.labs.sauti.model.exchange_rate.consume;
 
 public class Rate {
 

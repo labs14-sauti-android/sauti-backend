@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.labs.sauti.model.ServerStat;
 import com.labs.sauti.model.exchange_rate.ExchangeRate;
-import com.labs.sauti.model.exchange_rate.Rate;
+import com.labs.sauti.model.exchange_rate.consume.Rate;
 import com.labs.sauti.repository.ExchangeRateRepository;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;

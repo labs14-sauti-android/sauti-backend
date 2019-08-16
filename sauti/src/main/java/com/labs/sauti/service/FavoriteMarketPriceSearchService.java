@@ -11,5 +11,5 @@ public interface FavoriteMarketPriceSearchService {
             ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches
     );
     List<FavoriteMarketPriceSearch> getFavoriteMarketPriceSearches();
-    void deleteAllByIds(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches);
+    void deleteAllByIds(ArrayList<Long> ids);
 }

@@ -59,13 +59,10 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
     }
 
     @Override
-    public void deleteAllByIds(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
+    public void deleteAllByIds(ArrayList<Long> ids) {
         User user = userService.getAuthenticatedUser();
-        for (FavoriteTradeInfoSearch favoriteTradeInfoSearch : favoriteTradeInfoSearches) {
-            favoriteTradeInfoSearchRepository.deleteAllByIdAndUserId(
-                    favoriteTradeInfoSearch.getFavoriteTradeInfoSearchId(),
-                    user.getUserId()
-            );
+        for (Long id : ids) {
+            favoriteTradeInfoSearchRepository.deleteAllByIdAndUserId(id, user.getUserId());
         }
     }
 }

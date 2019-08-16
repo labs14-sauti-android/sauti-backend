@@ -34,7 +34,7 @@ public class FavoriteRegulatedGoodSearchController {
     }
 
     @PreAuthorize("hasAuthority('USER')")
-    @DeleteMapping("favorite-regulate-good-searches")
+    @DeleteMapping("favorite-regulated-good-searches")
     public ResponseEntity deleteAllByIds(@RequestBody ArrayList<Long> ids) {
         favoriteRegulatedGoodSearchService.deleteAllByIds(ids);
         return new ResponseEntity(HttpStatus.OK);

@@ -9,6 +9,6 @@ public interface FavoriteTradeInfoSearchService {
 
     List<Long> saveAllFavoriteTradeInfoSearches(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches);
     List<FavoriteTradeInfoSearch> getFavoriteTradeInfoSearches();
-    void deleteAllByIds(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches);
+    void deleteAllByIds(ArrayList<Long> ids);
 
 }

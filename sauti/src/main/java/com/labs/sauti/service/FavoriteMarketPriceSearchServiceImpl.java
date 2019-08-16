@@ -54,13 +54,10 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
     }
 
     @Override
-    public void deleteAllByIds(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
+    public void deleteAllByIds(ArrayList<Long> ids) {
         User user = userService.getAuthenticatedUser();
-        for (FavoriteMarketPriceSearch favoriteMarketPriceSearch : favoriteMarketPriceSearches) {
-            favoriteMarketPriceSearchRepository.deleteByIdAndUserId(
-                    favoriteMarketPriceSearch.getFavoriteMarketPriceSearchId(),
-                    user.getUserId()
-            );
+        for (Long id : ids) {
+            favoriteMarketPriceSearchRepository.deleteByIdAndUserId(id, user.getUserId());
         }
     }
 }

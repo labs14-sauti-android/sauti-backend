@@ -35,8 +35,8 @@ public class FavoriteMarketPriceSearchController {
 
     @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping("favorite-market-price-searches")
-    public ResponseEntity deleteAllByIds(@RequestBody ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
-        favoriteMarketPriceSearchService.deleteAllByIds(favoriteMarketPriceSearches);
+    public ResponseEntity deleteAllByIds(@RequestBody ArrayList<Long> ids) {
+        favoriteMarketPriceSearchService.deleteAllByIds(ids);
         return new ResponseEntity(HttpStatus.OK);
     }
 

@@ -38,8 +38,8 @@ public class FavoriteTradeInfoSearchController {
 
     @PreAuthorize("hasAuthority('USER')")
     @DeleteMapping("favorite-trade-info-searches")
-    public ResponseEntity deleteAllByIds(@RequestBody ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
-        favoriteTradeInfoSearchService.deleteAllByIds(favoriteTradeInfoSearches);
+    public ResponseEntity deleteAllByIds(@RequestBody ArrayList<Long> ids) {
+        favoriteTradeInfoSearchService.deleteAllByIds(ids);
         return new ResponseEntity(HttpStatus.OK);
     }
 

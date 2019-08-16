@@ -18,6 +18,7 @@ public class ExchangeRateController {
         this.exchangeRateService = exchangeRateService;
     }
 
+    // TODO change to "exchange-rates"
     @GetMapping("exchange-rate/all")
     public ResponseEntity<List<ExchangeRate>> getAll() {
         return new ResponseEntity<>(exchangeRateService.getExchangeRates(), HttpStatus.OK);

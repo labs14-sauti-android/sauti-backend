@@ -24,7 +24,7 @@ import java.util.List;
 public class MarketPriceServiceImpl implements MarketPriceService {
 
     private static final long MAX_AGE = 5L * 7L * 24L * 60L * 60L * 1000L; // 5 weeks
-    private static final long UPDATE_DELAY = 15L * 60000L; // 15 mins
+    private static final long UPDATE_DELAY = 70L * 60000L; // 70 mins
 
     private ServerStatService serverStatService;
     private MarketPriceRepository marketPriceRepository;

@@ -40,8 +40,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient(System.getenv("CLIENT_ID"))
-                .secret(passwordEncoder.encode(System.getenv("CLIENT_SECRET")))
+                .withClient(System.getenv("CLIENT_ID")) // @HEROKU_INIT do not forget to set this on heroku
+                .secret(passwordEncoder.encode(System.getenv("CLIENT_SECRET"))) // @HEROKU_INIT do not forget to set this on heroku
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
                 .scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS)

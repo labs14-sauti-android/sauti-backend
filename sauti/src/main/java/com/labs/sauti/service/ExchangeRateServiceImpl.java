@@ -22,7 +22,7 @@ import java.util.List;
 @Service("exchangeRates")
 public class ExchangeRateServiceImpl implements ExchangeRateService {
 
-    private static final long UPDATE_DELAY = 5L * 60000L; // 5 mins
+    private static final long UPDATE_DELAY = 120L * 60000L; // 120 mins
 
     private ServerStatService serverStatService;
     private ExchangeRateRepository exchangeRateRepository;

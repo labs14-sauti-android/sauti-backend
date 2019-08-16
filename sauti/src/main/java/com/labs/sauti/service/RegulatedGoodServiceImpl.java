@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ import java.util.Map;
 @Service("regulatedGoodService")
 public class RegulatedGoodServiceImpl implements RegulatedGoodService {
 
-    private static final long UPDATE_DELAY = 14L * 60000L; // 14 mins
+    private static final long UPDATE_DELAY = 60L * 60000L; // 60 mins
 
     private ServerStatService serverStatService;
     private RegulatedGoodRepository regulatedGoodRepository;
@@ -42,6 +43,7 @@ public class RegulatedGoodServiceImpl implements RegulatedGoodService {
     }
 
     @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Transactional
     public void updateRegulatedGoods() {
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/regulatedGoods/&type=json",

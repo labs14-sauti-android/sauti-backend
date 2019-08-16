@@ -24,7 +24,7 @@ import java.util.Map;
 @Service("tradeInfoService")
 public class TradeInfoServiceImpl implements TradeInfoService {
 
-    private static final long UPDATE_DELAY = 16L * 60000L; // 16 mins
+    private static final long UPDATE_DELAY = 80L * 60000L; // 80 mins
 
     private ServerStatService serverStatService;
     private TradeInfoRepository tradeInfoRepository;

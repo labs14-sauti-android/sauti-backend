@@ -43,6 +43,7 @@ public class RegulatedGoodServiceImpl implements RegulatedGoodService {
     }
 
     @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Transactional
     public void updateRegulatedGoods() {
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/regulatedGoods/&type=json",

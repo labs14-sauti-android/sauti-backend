@@ -37,6 +37,7 @@ public class TradeInfoServiceImpl implements TradeInfoService {
     }
 
     @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Transactional
     public void updateTradeInfos() {
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/tradeProcedures/&type=json",

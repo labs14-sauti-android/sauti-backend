@@ -25,7 +25,7 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
 
     @Override
     @Transactional
-    public List<Long> saveAllFavoriteTradeInfoSearches(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
+    public List<Long> saveAll(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearchesSaving = new ArrayList<>(favoriteTradeInfoSearches.size());
 
@@ -43,17 +43,17 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
             ));
         }
 
-        ArrayList<Long> favoriteTradeInfoSearchIds = new ArrayList<>();
+        ArrayList<Long> favoriteTradeInfoSearchIds = new ArrayList<>(favoriteTradeInfoSearchesSaving.size());
         favoriteTradeInfoSearchRepository.saveAll(favoriteTradeInfoSearchesSaving)
                 .iterator()
-                .forEachRemaining((favoriteTradeInfoSearch ->
-                        favoriteTradeInfoSearchIds.add(favoriteTradeInfoSearch.getFavoriteTradeInfoSearchId())));
+                .forEachRemaining(favoriteTradeInfoSearch ->
+                        favoriteTradeInfoSearchIds.add(favoriteTradeInfoSearch.getFavoriteTradeInfoSearchId()));
 
         return favoriteTradeInfoSearchIds;
     }
 
     @Override
-    public List<FavoriteTradeInfoSearch> getFavoriteTradeInfoSearches() {
+    public List<FavoriteTradeInfoSearch> getAll() {
         User user = userService.getAuthenticatedUser();
         return favoriteTradeInfoSearchRepository.findAllByUserId(user.getUserId());
     }

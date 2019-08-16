@@ -25,7 +25,7 @@ public class FavoriteTradeInfoSearchController {
             @RequestBody ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches
             ) {
         return new ResponseEntity<>(
-                favoriteTradeInfoSearchService.saveAllFavoriteTradeInfoSearches(favoriteTradeInfoSearches),
+                favoriteTradeInfoSearchService.saveAll(favoriteTradeInfoSearches),
                 HttpStatus.OK
         );
     }
@@ -33,7 +33,7 @@ public class FavoriteTradeInfoSearchController {
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("favorite-trade-info-searches")
     public ResponseEntity<List<FavoriteTradeInfoSearch>> getFavoriteTradeInfoSearches() {
-        return new ResponseEntity<>(favoriteTradeInfoSearchService.getFavoriteTradeInfoSearches(), HttpStatus.OK);
+        return new ResponseEntity<>(favoriteTradeInfoSearchService.getAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")

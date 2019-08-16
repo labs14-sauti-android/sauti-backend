@@ -3,6 +3,7 @@ package com.labs.sauti.model.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.labs.sauti.model.exchange_rate.FavoriteExchangeRateConversion;
 import com.labs.sauti.model.market_price.FavoriteMarketPriceSearch;
 import com.labs.sauti.model.regulated_good.FavoriteRegulatedGoodSearch;
 import com.labs.sauti.model.trade_info.FavoriteTradeInfoSearch;
@@ -45,6 +46,9 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<FavoriteExchangeRateConversion> favoriteExchangeRateConversions = new ArrayList<>();
 
     public User() {
     }
@@ -100,6 +104,22 @@ public class User {
 
     public void setFavoriteTradeInfoSearches(List<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
         this.favoriteTradeInfoSearches = favoriteTradeInfoSearches;
+    }
+
+    public List<FavoriteRegulatedGoodSearch> getFavoriteRegulatedGoodSearches() {
+        return favoriteRegulatedGoodSearches;
+    }
+
+    public void setFavoriteRegulatedGoodSearches(List<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches) {
+        this.favoriteRegulatedGoodSearches = favoriteRegulatedGoodSearches;
+    }
+
+    public List<FavoriteExchangeRateConversion> getFavoriteExchangeRateConversions() {
+        return favoriteExchangeRateConversions;
+    }
+
+    public void setFavoriteExchangeRateConversions(List<FavoriteExchangeRateConversion> favoriteExchangeRateConversions) {
+        this.favoriteExchangeRateConversions = favoriteExchangeRateConversions;
     }
 
     @JsonIgnore

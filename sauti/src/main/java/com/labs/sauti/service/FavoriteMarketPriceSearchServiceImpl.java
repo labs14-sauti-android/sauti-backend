@@ -23,9 +23,7 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
 
     @Override
     @Transactional
-    public List<Long> saveAllFavoriteMarketPriceSearches(
-            ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches
-    ) {
+    public List<Long> saveAll(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearchesSaving = new ArrayList<>(favoriteMarketPriceSearches.size());
 
@@ -38,17 +36,17 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
                     user
             ));
         }
-        ArrayList<Long> favoriteMarketPriceSearchIds = new ArrayList<>();
+        ArrayList<Long> favoriteMarketPriceSearchIds = new ArrayList<>(favoriteMarketPriceSearchesSaving.size());
         favoriteMarketPriceSearchRepository.saveAll(favoriteMarketPriceSearchesSaving)
                 .iterator()
-                .forEachRemaining((favoriteMarketPriceSearch) ->
+                .forEachRemaining(favoriteMarketPriceSearch ->
                         favoriteMarketPriceSearchIds.add(favoriteMarketPriceSearch.getFavoriteMarketPriceSearchId()));
 
         return favoriteMarketPriceSearchIds;
     }
 
     @Override
-    public List<FavoriteMarketPriceSearch> getFavoriteMarketPriceSearches() {
+    public List<FavoriteMarketPriceSearch> getAll() {
         User user = userService.getAuthenticatedUser();
         return favoriteMarketPriceSearchRepository.findAllByUserId(user.getUserId());
     }

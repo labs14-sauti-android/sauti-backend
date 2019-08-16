@@ -24,13 +24,13 @@ public class FavoriteMarketPriceSearchController {
     public ResponseEntity<List<Long>> addAllFavoriteMarketPriceSearches(
             @RequestBody ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches
     ) {
-        return new ResponseEntity<>(favoriteMarketPriceSearchService.saveAllFavoriteMarketPriceSearches(favoriteMarketPriceSearches), HttpStatus.OK);
+        return new ResponseEntity<>(favoriteMarketPriceSearchService.saveAll(favoriteMarketPriceSearches), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @GetMapping("favorite-market-price-searches")
     public ResponseEntity<List<FavoriteMarketPriceSearch>> getFavoriteMarketPriceSearches() {
-        return new ResponseEntity<>(favoriteMarketPriceSearchService.getFavoriteMarketPriceSearches(), HttpStatus.OK);
+        return new ResponseEntity<>(favoriteMarketPriceSearchService.getAll(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")

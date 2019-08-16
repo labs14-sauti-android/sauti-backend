@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface FavoriteTradeInfoSearchService {
 
-    List<Long> saveAllFavoriteTradeInfoSearches(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches);
-    List<FavoriteTradeInfoSearch> getFavoriteTradeInfoSearches();
+    List<Long> saveAll(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches);
+    List<FavoriteTradeInfoSearch> getAll();
     void deleteAllByIds(ArrayList<Long> ids);
 
 }

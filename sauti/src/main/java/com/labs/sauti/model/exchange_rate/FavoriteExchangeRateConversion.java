@@ -1,9 +1,9 @@
 package com.labs.sauti.model.exchange_rate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.labs.sauti.model.user.User;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "favoriteExchangeRateConversions")
@@ -17,13 +17,19 @@ public class FavoriteExchangeRateConversion {
     private String toCurrency;
     private double value;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    @JsonIgnore
+    private User user;
+
     public FavoriteExchangeRateConversion() {
     }
 
-    public FavoriteExchangeRateConversion(String fromCurrency, String toCurrency, double value) {
+    public FavoriteExchangeRateConversion(String fromCurrency, String toCurrency, double value, User user) {
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.value = value;
+        this.user = user;
     }
 
     public long getFavoriteExchangeRateConversionId() {
@@ -56,5 +62,13 @@ public class FavoriteExchangeRateConversion {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

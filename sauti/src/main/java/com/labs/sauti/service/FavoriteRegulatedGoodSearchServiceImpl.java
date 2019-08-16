@@ -28,7 +28,7 @@ public class FavoriteRegulatedGoodSearchServiceImpl implements FavoriteRegulated
     @Transactional
     public List<Long> saveAll(ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches) {
         User user = userService.getAuthenticatedUser();
-        ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearchesSaving = new ArrayList<>();
+        ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearchesSaving = new ArrayList<>(favoriteRegulatedGoodSearches.size());
 
         for (FavoriteRegulatedGoodSearch favoriteRegulatedGoodSearch : favoriteRegulatedGoodSearches) {
             favoriteRegulatedGoodSearchesSaving.add(new FavoriteRegulatedGoodSearch(
@@ -38,10 +38,10 @@ public class FavoriteRegulatedGoodSearchServiceImpl implements FavoriteRegulated
             ));
         }
 
-        ArrayList<Long> favoriteRegulatedGoodIds = new ArrayList<>();
+        ArrayList<Long> favoriteRegulatedGoodIds = new ArrayList<>(favoriteRegulatedGoodSearchesSaving.size());
         favoriteRegulatedGoodSearchRepository.saveAll(favoriteRegulatedGoodSearchesSaving)
                 .iterator()
-                .forEachRemaining((favoriteRegulatedGood) ->
+                .forEachRemaining(favoriteRegulatedGood ->
                         favoriteRegulatedGoodIds.add(favoriteRegulatedGood.getFavoriteRegulatedGoodSearchId()));
 
         return favoriteRegulatedGoodIds;

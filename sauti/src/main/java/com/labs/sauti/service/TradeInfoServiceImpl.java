@@ -16,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("tradeInfoService")
 public class TradeInfoServiceImpl implements TradeInfoService {
@@ -36,9 +33,21 @@ public class TradeInfoServiceImpl implements TradeInfoService {
         this.tradeInfoRepository = tradeInfoRepository;
     }
 
-    @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Scheduled(initialDelay = 1000L, fixedDelay = Long.MAX_VALUE)
+    public void updateTradeInfosInit() {
+        updateTradeInfos();
+    }
+
+    @Scheduled(cron = "0 40 * * * *")
+    public void updateTradeInfosCron() {
+        updateTradeInfos();
+    }
+
+    @Override
     @Transactional
     public void updateTradeInfos() {
+        System.out.println("updateTradeInfos at " + new Date());
+
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/tradeProcedures/&type=json",
                         HttpMethod.GET, null, String.class);

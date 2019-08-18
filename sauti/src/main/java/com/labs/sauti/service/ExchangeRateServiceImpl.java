@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,9 +35,21 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         this.exchangeRateRepository = exchangeRateRepository;
     }
 
-    @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Scheduled(initialDelay = 1000L, fixedDelay = Long.MAX_VALUE)
+    public void updateExchangeRatesInit() {
+        updateExchangeRates();
+    }
+
+    @Scheduled(cron = "0 10 * * * *")
+    public void updateExchangeRatesCron() {
+        updateExchangeRates();
+    }
+
+    @Override
     @Transactional
     public void updateExchangeRates() {
+        System.out.println("updateExchangeRates at " + new Date());
+
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/exchangeRates/&type=json",
                         HttpMethod.GET, null, String.class);

@@ -18,7 +18,7 @@ public class ServerStatController {
         this.serverStatService = serverStatService;
     }
 
-    @GetMapping("server-stat/all")
+    @GetMapping("server-stats")
     public ResponseEntity<List<ServerStat>> getAll() {
         return new ResponseEntity<>(serverStatService.getServerStats(), HttpStatus.OK);
     }

@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface RegulatedGoodService {
 
+    void updateRegulatedGoods();
     List<String> getLanguages();
     List<String> getCountries(String language);
     RegulatedGood getRegulatedGood(String language, String country);

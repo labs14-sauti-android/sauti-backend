@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TradeInfoService {
 
+    void updateTradeInfos();
     List<TradeInfo> getAll();
     List<String> getLanguages();
     List<String> getCategories(String language);

@@ -36,9 +36,21 @@ public class MarketPriceServiceImpl implements MarketPriceService {
         this.marketPriceRepository = marketPriceRepository;
     }
 
-    @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Scheduled(initialDelay = 1000L, fixedDelay = Long.MAX_VALUE)
+    public void updateMarketPricesInit() {
+        updateMarketPrices();
+    }
+
+    @Scheduled(cron = "0 30 * * * *")
+    public void updateMarketPricesCron() {
+        updateMarketPrices();
+    }
+
+    @Override
     @Transactional
     public void updateMarketPrices() {
+        System.out.println("updateMarketPrices at " + new Date());
+
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/marketPrices/&type=json",
                         HttpMethod.GET, null, String.class);

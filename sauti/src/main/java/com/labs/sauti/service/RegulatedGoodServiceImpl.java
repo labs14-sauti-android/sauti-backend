@@ -19,10 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("regulatedGoodService")
 public class RegulatedGoodServiceImpl implements RegulatedGoodService {
@@ -42,9 +39,21 @@ public class RegulatedGoodServiceImpl implements RegulatedGoodService {
         this.regulatedGoodRepository = regulatedGoodRepository;
     }
 
-    @Scheduled(initialDelay = 1000L, fixedDelay = UPDATE_DELAY)
+    @Scheduled(initialDelay = 1000L, fixedDelay = Long.MAX_VALUE)
+    public void updateRegulatedGoodsInit() {
+        updateRegulatedGoods();
+    }
+
+    @Scheduled(cron = "0 20 * * * *")
+    public void updateRegulatedGoodsCron() {
+        updateRegulatedGoods();
+    }
+
+    @Override
     @Transactional
     public void updateRegulatedGoods() {
+        System.out.println("updateRegulatedGoods at " + new Date());
+
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange("http://sautiafrica.org/endpoints/api.php?url=v1/regulatedGoods/&type=json",
                         HttpMethod.GET, null, String.class);

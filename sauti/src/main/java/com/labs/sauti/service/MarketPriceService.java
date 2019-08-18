@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface MarketPriceService {
 
+    void updateMarketPrices();
     List<MarketPrice> getAll();
     List<String> getCountries();
     List<String> getMarkets(String country);

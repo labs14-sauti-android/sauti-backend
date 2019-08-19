@@ -35,6 +35,12 @@ public class User {
     @JsonIgnoreProperties("user")
     private List<UserRole> userRoles = new ArrayList<>();
 
+    private String phoneNumber;
+    private String firstName;
+    private String lastName;
+    private String location;
+    private String gender;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<FavoriteMarketPriceSearch> favoriteMarketPriceSearches = new ArrayList<>();
@@ -53,9 +59,14 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String phoneNumber, String firstName, String lastName, String location, String gender) {
         this.username = username;
         setPasswordEncrypt(password);
+        this.phoneNumber = phoneNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.location = location;
+        this.gender = gender;
     }
 
     public long getUserId() {
@@ -88,6 +99,46 @@ public class User {
 
     public void setUserRoles(List<UserRole> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public List<FavoriteMarketPriceSearch> getFavoriteMarketPriceSearches() {

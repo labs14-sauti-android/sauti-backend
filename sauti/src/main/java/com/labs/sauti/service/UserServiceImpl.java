@@ -1,11 +1,12 @@
 package com.labs.sauti.service;
 
-import com.labs.sauti.model.market_price.FavoriteMarketPriceSearch;
 import com.labs.sauti.model.user.Role;
 import com.labs.sauti.model.user.User;
 import com.labs.sauti.model.user.UserRole;
 import com.labs.sauti.repository.RoleRepository;
 import com.labs.sauti.repository.UserRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service("userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -35,23 +37,30 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public User save(User user) {
-        // TODO throw username taken
+    public Long save(User user) {
+        User foundUser = userRepository.findUserByUsername(user.getUsername());
+        if (foundUser != null) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username taken");
 
-        User newUser = new User(user.getUsername(), user.getPassword());
+        User newUser = new User(
+                user.getUsername(),
+                user.getPassword(),
+                user.getPhoneNumber(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getLocation(),
+                user.getGender()
+        );
         Role roleUser = roleRepository.findByName("user");
         newUser.getUserRoles().add(new UserRole(newUser, roleUser));
 
-        return userRepository.save(newUser);
+        return userRepository.save(newUser).getUserId();
     }
 
     @Override
+    @Nullable
     public User getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User authenticatedUser = userRepository.findUserByUsername(authentication.getName());
-        // if (authenticatedUser == null) TODO
-
-        return authenticatedUser;
+        return userRepository.findUserByUsername(authentication.getName());
     }
 
     @Override

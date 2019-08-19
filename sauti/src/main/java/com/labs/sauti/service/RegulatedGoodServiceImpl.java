@@ -24,8 +24,6 @@ import java.util.*;
 @Service("regulatedGoodService")
 public class RegulatedGoodServiceImpl implements RegulatedGoodService {
 
-    private static final long UPDATE_DELAY = 60L * 60000L; // 60 mins
-
     private ServerStatService serverStatService;
     private RegulatedGoodRepository regulatedGoodRepository;
 

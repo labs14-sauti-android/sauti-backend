@@ -17,8 +17,14 @@ public class UserController {
     }
 
     @PostMapping("users")
-    public ResponseEntity<User> register(@RequestBody User user) {
+    public ResponseEntity<Long> register(@RequestBody User user) {
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('USER')")
+    @GetMapping("users/user")
+    public ResponseEntity<User> getUser() {
+        return new ResponseEntity<>(userService.getAuthenticatedUser(), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('USER')")

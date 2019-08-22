@@ -17,7 +17,6 @@ public class FavoriteRegulatedGoodSearch {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonIgnore
     private User user;
 
     public FavoriteRegulatedGoodSearch() {
@@ -50,5 +49,9 @@ public class FavoriteRegulatedGoodSearch {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public long getUserId() {
+        return user.getUserId();
     }
 }

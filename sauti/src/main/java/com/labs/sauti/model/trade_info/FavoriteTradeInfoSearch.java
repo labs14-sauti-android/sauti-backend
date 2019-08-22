@@ -28,7 +28,6 @@ public class FavoriteTradeInfoSearch {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonIgnore
     private User user;
 
     public FavoriteTradeInfoSearch() {
@@ -106,5 +105,9 @@ public class FavoriteTradeInfoSearch {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public long getUserId() {
+        return user.getUserId();
     }
 }

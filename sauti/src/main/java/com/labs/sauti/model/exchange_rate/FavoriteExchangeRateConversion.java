@@ -19,7 +19,6 @@ public class FavoriteExchangeRateConversion {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonIgnore
     private User user;
 
     public FavoriteExchangeRateConversion() {
@@ -70,5 +69,9 @@ public class FavoriteExchangeRateConversion {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public long getUserId() {
+        return user.getUserId();
     }
 }

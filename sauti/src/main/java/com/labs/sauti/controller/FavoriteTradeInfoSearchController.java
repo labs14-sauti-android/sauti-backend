@@ -19,9 +19,10 @@ public class FavoriteTradeInfoSearchController {
         this.favoriteTradeInfoSearchService = favoriteTradeInfoSearchService;
     }
 
+    /** Add unique*/
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("favorite-trade-info-searches/all")
-    public ResponseEntity<List<Long>> saveAllFavoriteTradeInfoSearches(
+    public ResponseEntity<List<FavoriteTradeInfoSearch>> addAllFavoriteTradeInfoSearches(
             @RequestBody ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches
             ) {
         return new ResponseEntity<>(

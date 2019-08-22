@@ -1,5 +1,6 @@
 package com.labs.sauti.service;
 
+import com.labs.sauti.model.exchange_rate.FavoriteExchangeRateConversion;
 import com.labs.sauti.model.regulated_good.FavoriteRegulatedGoodSearch;
 import com.labs.sauti.model.user.User;
 import com.labs.sauti.repository.FavoriteRegulatedGoodSearchRepository;
@@ -26,25 +27,40 @@ public class FavoriteRegulatedGoodSearchServiceImpl implements FavoriteRegulated
 
     @Override
     @Transactional
-    public List<Long> saveAll(ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches) {
+    public List<FavoriteRegulatedGoodSearch> saveAll(ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearchesSaving = new ArrayList<>(favoriteRegulatedGoodSearches.size());
 
+        ArrayList<FavoriteRegulatedGoodSearch> currentFavoriteRegulatedGoodSearches =
+                favoriteRegulatedGoodSearchRepository.findAllByUserId(user.getUserId());
+
         for (FavoriteRegulatedGoodSearch favoriteRegulatedGoodSearch : favoriteRegulatedGoodSearches) {
+            // do not duplicate
+            if (contains(currentFavoriteRegulatedGoodSearches, favoriteRegulatedGoodSearch)) continue;
+
             favoriteRegulatedGoodSearchesSaving.add(new FavoriteRegulatedGoodSearch(
-                    favoriteRegulatedGoodSearch.getLanguage(),
                     favoriteRegulatedGoodSearch.getCountry(),
                     user
             ));
         }
 
-        ArrayList<Long> favoriteRegulatedGoodIds = new ArrayList<>(favoriteRegulatedGoodSearchesSaving.size());
+        ArrayList<FavoriteRegulatedGoodSearch> outFavoriteRegulatedGoods = new ArrayList<>(favoriteRegulatedGoodSearchesSaving.size());
         favoriteRegulatedGoodSearchRepository.saveAll(favoriteRegulatedGoodSearchesSaving)
                 .iterator()
-                .forEachRemaining(favoriteRegulatedGood ->
-                        favoriteRegulatedGoodIds.add(favoriteRegulatedGood.getFavoriteRegulatedGoodSearchId()));
+                .forEachRemaining(outFavoriteRegulatedGoods::add);
 
-        return favoriteRegulatedGoodIds;
+        return outFavoriteRegulatedGoods;
+    }
+
+    private static boolean contains(
+            ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches,
+            FavoriteRegulatedGoodSearch inFavoriteRegulatedGoodSearch
+    ) {
+        for (FavoriteRegulatedGoodSearch favoriteRegulatedGoodSearch : favoriteRegulatedGoodSearches) {
+            if (favoriteRegulatedGoodSearch.getCountry().equals(inFavoriteRegulatedGoodSearch.getCountry())) return true;
+        }
+
+        return false;
     }
 
     @Override

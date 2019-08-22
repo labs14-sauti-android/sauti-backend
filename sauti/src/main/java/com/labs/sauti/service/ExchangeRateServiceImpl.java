@@ -38,7 +38,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         updateExchangeRates();
     }
 
-    @Scheduled(cron = "0 10 * * * *")
+    @Scheduled(cron = "0 10 22 * * *")
     public void updateExchangeRatesCron() {
         updateExchangeRates();
     }

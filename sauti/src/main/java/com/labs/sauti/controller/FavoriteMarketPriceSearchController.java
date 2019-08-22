@@ -19,9 +19,10 @@ public class FavoriteMarketPriceSearchController {
         this.favoriteMarketPriceSearchService = favoriteMarketPriceSearchService;
     }
 
+    /** Add unique*/
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("favorite-market-price-searches/all")
-    public ResponseEntity<List<Long>> addAllFavoriteMarketPriceSearches(
+    public ResponseEntity<List<FavoriteMarketPriceSearch>> addAllFavoriteMarketPriceSearches(
             @RequestBody ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches
     ) {
         return new ResponseEntity<>(favoriteMarketPriceSearchService.saveAll(favoriteMarketPriceSearches), HttpStatus.OK);

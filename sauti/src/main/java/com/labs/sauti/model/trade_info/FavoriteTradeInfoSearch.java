@@ -20,7 +20,6 @@ public class FavoriteTradeInfoSearch {
     private long favoriteTradeInfoSearchId;
 
     private String type;
-    private String language;
     private String productCat;
     private String product;
     private String origin;
@@ -35,9 +34,8 @@ public class FavoriteTradeInfoSearch {
     public FavoriteTradeInfoSearch() {
     }
 
-    public FavoriteTradeInfoSearch(String type, String language, String productCat, String product, String origin, String dest, double value, User user) {
+    public FavoriteTradeInfoSearch(String type, String productCat, String product, String origin, String dest, double value, User user) {
         this.type = type;
-        this.language = language;
         this.productCat = productCat;
         this.product = product;
         this.origin = origin;
@@ -60,14 +58,6 @@ public class FavoriteTradeInfoSearch {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getProductCat() {

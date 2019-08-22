@@ -36,7 +36,7 @@ public class TradeInfoServiceImpl implements TradeInfoService {
         updateTradeInfos();
     }
 
-    @Scheduled(cron = "0 40 * * * *")
+    @Scheduled(cron = "0 40 22 * * *")
     public void updateTradeInfosCron() {
         updateTradeInfos();
     }

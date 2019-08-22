@@ -19,9 +19,10 @@ public class FavoriteRegulatedGoodSearchController {
         this.favoriteRegulatedGoodSearchService = favoriteRegulatedGoodSearchService;
     }
 
+    /** Add unique*/
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("favorite-regulated-good-searches/all")
-    public ResponseEntity<List<Long>> saveAllFavoriteRegulatedGoodSearches(
+    public ResponseEntity<List<FavoriteRegulatedGoodSearch>> addAllFavoriteRegulatedGoodSearches(
             @RequestBody  ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches
     ) {
         return new ResponseEntity<>(favoriteRegulatedGoodSearchService.saveAll(favoriteRegulatedGoodSearches), HttpStatus.OK);

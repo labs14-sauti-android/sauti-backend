@@ -23,11 +23,17 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
 
     @Override
     @Transactional
-    public List<Long> saveAll(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
+    public List<FavoriteMarketPriceSearch> saveAll(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearchesSaving = new ArrayList<>(favoriteMarketPriceSearches.size());
 
+        List<FavoriteMarketPriceSearch> currentFavoriteMarketPriceSearches =
+                favoriteMarketPriceSearchRepository.findAllByUserId(user.getUserId());
+
         for (FavoriteMarketPriceSearch favoriteMarketPriceSearch : favoriteMarketPriceSearches) {
+            // do not duplicate
+            if (contains(currentFavoriteMarketPriceSearches, favoriteMarketPriceSearch)) continue;
+
             favoriteMarketPriceSearchesSaving.add(new FavoriteMarketPriceSearch(
                     favoriteMarketPriceSearch.getCountry(),
                     favoriteMarketPriceSearch.getMarket(),
@@ -36,13 +42,28 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
                     user
             ));
         }
-        ArrayList<Long> favoriteMarketPriceSearchIds = new ArrayList<>(favoriteMarketPriceSearchesSaving.size());
+        ArrayList<FavoriteMarketPriceSearch> outFavoriteMarketPriceSearches = new ArrayList<>(favoriteMarketPriceSearchesSaving.size());
         favoriteMarketPriceSearchRepository.saveAll(favoriteMarketPriceSearchesSaving)
                 .iterator()
-                .forEachRemaining(favoriteMarketPriceSearch ->
-                        favoriteMarketPriceSearchIds.add(favoriteMarketPriceSearch.getFavoriteMarketPriceSearchId()));
+                .forEachRemaining(outFavoriteMarketPriceSearches::add);
 
-        return favoriteMarketPriceSearchIds;
+        return outFavoriteMarketPriceSearches;
+    }
+
+    private static boolean contains(
+            List<FavoriteMarketPriceSearch> favoriteMarketPriceSearches,
+            FavoriteMarketPriceSearch inFavoriteMarketPriceSearch
+    ) {
+        for (FavoriteMarketPriceSearch favoriteMarketPriceSearch : favoriteMarketPriceSearches) {
+            if (favoriteMarketPriceSearch.getCountry().equals(inFavoriteMarketPriceSearch.getCountry()) &&
+            favoriteMarketPriceSearch.getMarket().equals(inFavoriteMarketPriceSearch.getMarket()) &&
+            favoriteMarketPriceSearch.getCategory().equals(inFavoriteMarketPriceSearch.getCategory()) &&
+            favoriteMarketPriceSearch.getProduct().equals(inFavoriteMarketPriceSearch.getProduct())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override

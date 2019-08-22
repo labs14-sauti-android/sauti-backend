@@ -42,7 +42,7 @@ public class RegulatedGoodServiceImpl implements RegulatedGoodService {
         updateRegulatedGoods();
     }
 
-    @Scheduled(cron = "0 20 * * * *")
+    @Scheduled(cron = "0 20 22 * * *")
     public void updateRegulatedGoodsCron() {
         updateRegulatedGoods();
     }

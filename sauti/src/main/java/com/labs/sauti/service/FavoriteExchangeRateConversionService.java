@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FavoriteExchangeRateConversionService {
 
-    List<Long> saveAll(ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions);
+    List<FavoriteExchangeRateConversion> saveAll(ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions);
     List<FavoriteExchangeRateConversion> getAll();
     void deleteAllByIds(ArrayList<Long> ids);
 

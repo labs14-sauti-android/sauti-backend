@@ -25,11 +25,16 @@ public class FavoriteExchangeRateConversionServiceImpl implements FavoriteExchan
 
     @Override
     @Transactional
-    public List<Long> saveAll(ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions) {
+    public List<FavoriteExchangeRateConversion> saveAll(ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversionsSaving = new ArrayList<>(favoriteExchangeRateConversions.size());
 
+        ArrayList<FavoriteExchangeRateConversion> currentFavoriteExchangeRateConversions =
+                favoriteExchangeRateConversionRepository.findAllByUserId(user.getUserId());
+
         for (FavoriteExchangeRateConversion favoriteExchangeRateConversion : favoriteExchangeRateConversions) {
+            if (contains(currentFavoriteExchangeRateConversions, favoriteExchangeRateConversion)) continue;
+
             favoriteExchangeRateConversionsSaving.add(new FavoriteExchangeRateConversion(
                     favoriteExchangeRateConversion.getFromCurrency(),
                     favoriteExchangeRateConversion.getToCurrency(),
@@ -38,13 +43,25 @@ public class FavoriteExchangeRateConversionServiceImpl implements FavoriteExchan
             ));
         }
 
-        ArrayList<Long> favoriteExchangeRateConversionIds = new ArrayList<>(favoriteExchangeRateConversionsSaving.size());
+        ArrayList<FavoriteExchangeRateConversion> outFavoriteExchangeRateConversions = new ArrayList<>(favoriteExchangeRateConversionsSaving.size());
         favoriteExchangeRateConversionRepository.saveAll(favoriteExchangeRateConversionsSaving)
                 .iterator()
-                .forEachRemaining(favoriteExchangeRateConversion ->
-                        favoriteExchangeRateConversionIds.add(favoriteExchangeRateConversion.getFavoriteExchangeRateConversionId()));
+                .forEachRemaining(outFavoriteExchangeRateConversions::add);
 
-        return favoriteExchangeRateConversionIds;
+        return outFavoriteExchangeRateConversions;
+    }
+
+    private static boolean contains(
+            ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions,
+            FavoriteExchangeRateConversion inFavoriteExchangeRateConversion
+    ) {
+        for (FavoriteExchangeRateConversion favoriteExchangeRateConversion : favoriteExchangeRateConversions) {
+            if (favoriteExchangeRateConversion.getFromCurrency().equals(inFavoriteExchangeRateConversion.getFromCurrency()) &&
+            favoriteExchangeRateConversion.getToCurrency().equals(inFavoriteExchangeRateConversion.getToCurrency()) &&
+            favoriteExchangeRateConversion.getValue() == inFavoriteExchangeRateConversion.getValue()) return true;
+        }
+
+        return false;
     }
 
     @Override

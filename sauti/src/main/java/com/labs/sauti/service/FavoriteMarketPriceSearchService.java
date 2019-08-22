@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FavoriteMarketPriceSearchService {
 
-    List<Long> saveAll(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches);
+    List<FavoriteMarketPriceSearch> saveAll(ArrayList<FavoriteMarketPriceSearch> favoriteMarketPriceSearches);
     List<FavoriteMarketPriceSearch> getAll();
     void deleteAllByIds(ArrayList<Long> ids);
 }

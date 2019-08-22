@@ -18,8 +18,9 @@ public class FavoriteExchangeRateConversionController {
         this.favoriteExchangeRateConversionService = favoriteExchangeRateConversionService;
     }
 
+    /** Add unique*/
     @PostMapping("favorite-exchange-rate-conversions/all")
-    public ResponseEntity<List<Long>> addAllFavoriteExchangeRateConversions(
+    public ResponseEntity<List<FavoriteExchangeRateConversion>> addAllFavoriteExchangeRateConversions(
             @RequestBody ArrayList<FavoriteExchangeRateConversion> favoriteExchangeRateConversions
     ) {
         return new ResponseEntity<>(favoriteExchangeRateConversionService.saveAll(favoriteExchangeRateConversions), HttpStatus.OK);

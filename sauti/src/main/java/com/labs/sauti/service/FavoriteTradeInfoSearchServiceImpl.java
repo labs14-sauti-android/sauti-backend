@@ -25,15 +25,20 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
 
     @Override
     @Transactional
-    public List<Long> saveAll(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
+    public List<FavoriteTradeInfoSearch> saveAll(ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches) {
         User user = userService.getAuthenticatedUser();
         ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearchesSaving = new ArrayList<>(favoriteTradeInfoSearches.size());
 
+        ArrayList<FavoriteTradeInfoSearch> currentFavoriteTradeInfoSearches =
+                favoriteTradeInfoSearchRepository.findAllByUserId(user.getUserId());
+
         // TODO check type
         for (FavoriteTradeInfoSearch favoriteTradeInfoSearch : favoriteTradeInfoSearches) {
+            // do not duplicate
+            if (contains(currentFavoriteTradeInfoSearches, favoriteTradeInfoSearch)) continue;
+
             favoriteTradeInfoSearchesSaving.add(new FavoriteTradeInfoSearch(
                     favoriteTradeInfoSearch.getType(),
-                    favoriteTradeInfoSearch.getLanguage(),
                     favoriteTradeInfoSearch.getProductCat(),
                     favoriteTradeInfoSearch.getProduct(),
                     favoriteTradeInfoSearch.getOrigin(),
@@ -43,13 +48,28 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
             ));
         }
 
-        ArrayList<Long> favoriteTradeInfoSearchIds = new ArrayList<>(favoriteTradeInfoSearchesSaving.size());
+        ArrayList<FavoriteTradeInfoSearch> outFavoriteTradeInfoSearches = new ArrayList<>(favoriteTradeInfoSearchesSaving.size());
         favoriteTradeInfoSearchRepository.saveAll(favoriteTradeInfoSearchesSaving)
                 .iterator()
-                .forEachRemaining(favoriteTradeInfoSearch ->
-                        favoriteTradeInfoSearchIds.add(favoriteTradeInfoSearch.getFavoriteTradeInfoSearchId()));
+                .forEachRemaining(outFavoriteTradeInfoSearches::add);
 
-        return favoriteTradeInfoSearchIds;
+        return outFavoriteTradeInfoSearches;
+    }
+
+    private static boolean contains(
+            ArrayList<FavoriteTradeInfoSearch> favoriteTradeInfoSearches,
+            FavoriteTradeInfoSearch inFavoriteTradeInfoSearch
+    ) {
+        for (FavoriteTradeInfoSearch favoriteTradeInfoSearch : favoriteTradeInfoSearches) {
+            if (favoriteTradeInfoSearch.getType().equals(inFavoriteTradeInfoSearch.getType()) &&
+            favoriteTradeInfoSearch.getProductCat().equals(inFavoriteTradeInfoSearch.getProductCat()) &&
+            favoriteTradeInfoSearch.getProduct().equals(inFavoriteTradeInfoSearch.getProduct()) &&
+            favoriteTradeInfoSearch.getOrigin().equals(inFavoriteTradeInfoSearch.getOrigin()) &&
+            favoriteTradeInfoSearch.getDest().equals(inFavoriteTradeInfoSearch.getDest()) &&
+            favoriteTradeInfoSearch.getValue() == inFavoriteTradeInfoSearch.getValue()) return true;
+        }
+
+        return false;
     }
 
     @Override

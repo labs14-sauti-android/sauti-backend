@@ -13,7 +13,6 @@ public class FavoriteRegulatedGoodSearch {
     @GeneratedValue
     private long favoriteRegulatedGoodSearchId;
 
-    private String language;
     private String country;
 
     @ManyToOne
@@ -24,8 +23,7 @@ public class FavoriteRegulatedGoodSearch {
     public FavoriteRegulatedGoodSearch() {
     }
 
-    public FavoriteRegulatedGoodSearch(String language, String country, User user) {
-        this.language = language;
+    public FavoriteRegulatedGoodSearch(String country, User user) {
         this.country = country;
         this.user = user;
     }
@@ -36,14 +34,6 @@ public class FavoriteRegulatedGoodSearch {
 
     public void setFavoriteRegulatedGoodSearchId(long favoriteRegulatedGoodSearchId) {
         this.favoriteRegulatedGoodSearchId = favoriteRegulatedGoodSearchId;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
     }
 
     public String getCountry() {

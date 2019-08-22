@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface FavoriteRegulatedGoodSearchService {
 
-    List<Long> saveAll(ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches);
+    List<FavoriteRegulatedGoodSearch> saveAll(ArrayList<FavoriteRegulatedGoodSearch> favoriteRegulatedGoodSearches);
     List<FavoriteRegulatedGoodSearch> getAll();
     void deleteAllByIds(ArrayList<Long> ids);
 

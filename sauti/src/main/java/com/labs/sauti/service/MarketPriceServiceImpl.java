@@ -40,7 +40,7 @@ public class MarketPriceServiceImpl implements MarketPriceService {
         updateMarketPrices();
     }
 
-    @Scheduled(cron = "0 30 * * * *")
+    @Scheduled(cron = "0 30 22 * * *")
     public void updateMarketPricesCron() {
         updateMarketPrices();
     }

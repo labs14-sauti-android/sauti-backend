@@ -84,6 +84,8 @@ public class MarketPriceServiceImpl implements MarketPriceService {
         }
 
         System.gc();
+
+        System.out.println("updateMarketPrices finished at " + new Date());
     }
 
     @Override

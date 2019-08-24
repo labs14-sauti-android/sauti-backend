@@ -21,7 +21,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/oauth/revoke-token").authenticated()
+                .antMatchers(
+                        "/oauth/revoke-token",
+                        "/users/user/logout"
+                ).authenticated()
                 .antMatchers("/actuator/**").hasAnyRole("ADMIN")
                 .and()
                 .exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());

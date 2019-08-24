@@ -70,6 +70,8 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         }
 
         System.gc();
+
+        System.out.println("updateExchangeRates finished at " + new Date());
     }
 
     @Override

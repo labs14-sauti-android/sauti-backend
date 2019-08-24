@@ -106,6 +106,8 @@ public class RegulatedGoodServiceImpl implements RegulatedGoodService {
         }
 
         System.gc();
+
+        System.out.println("updateRegulatedGoods finished at " + new Date());
     }
 
     @Override

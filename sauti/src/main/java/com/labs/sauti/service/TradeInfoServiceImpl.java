@@ -86,11 +86,14 @@ public class TradeInfoServiceImpl implements TradeInfoService {
             tradeInfoRepository.saveAll(tradeInfos);
 
             serverStatService.addValueOrCreateServerStat(new ServerStat("TradeInfos Update", 1.0));
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         System.gc();
+
+        System.out.println("updateTradeInfos finished at " + new Date());
     }
 
     @Override

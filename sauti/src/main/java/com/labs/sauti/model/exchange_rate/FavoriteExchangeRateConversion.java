@@ -19,6 +19,7 @@ public class FavoriteExchangeRateConversion {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     public FavoriteExchangeRateConversion() {

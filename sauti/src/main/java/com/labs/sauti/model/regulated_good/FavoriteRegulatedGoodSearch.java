@@ -17,6 +17,7 @@ public class FavoriteRegulatedGoodSearch {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     public FavoriteRegulatedGoodSearch() {

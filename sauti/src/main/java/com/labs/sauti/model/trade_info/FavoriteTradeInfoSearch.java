@@ -28,6 +28,7 @@ public class FavoriteTradeInfoSearch {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     public FavoriteTradeInfoSearch() {

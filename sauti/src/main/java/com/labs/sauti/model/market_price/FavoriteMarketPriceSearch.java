@@ -20,6 +20,7 @@ public class FavoriteMarketPriceSearch {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnore
     private User user;
 
     public FavoriteMarketPriceSearch() {

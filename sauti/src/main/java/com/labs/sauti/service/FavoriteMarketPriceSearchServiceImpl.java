@@ -39,6 +39,7 @@ public class FavoriteMarketPriceSearchServiceImpl implements FavoriteMarketPrice
                     favoriteMarketPriceSearch.getMarket(),
                     favoriteMarketPriceSearch.getCategory(),
                     favoriteMarketPriceSearch.getProduct(),
+                    favoriteMarketPriceSearch.getTimestamp(),
                     user
             ));
         }

@@ -17,6 +17,7 @@ public class FavoriteMarketPriceSearch {
     private String market;
     private String category;
     private String product;
+    private long timestamp;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -26,11 +27,12 @@ public class FavoriteMarketPriceSearch {
     public FavoriteMarketPriceSearch() {
     }
 
-    public FavoriteMarketPriceSearch(String country, String market, String category, String product, User user) {
+    public FavoriteMarketPriceSearch(String country, String market, String category, String product, long timestamp, User user) {
         this.country = country;
         this.market = market;
         this.category = category;
         this.product = product;
+        this.timestamp = timestamp;
         this.user = user;
     }
 
@@ -72,6 +74,14 @@ public class FavoriteMarketPriceSearch {
 
     public void setProduct(String product) {
         this.product = product;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getUser() {

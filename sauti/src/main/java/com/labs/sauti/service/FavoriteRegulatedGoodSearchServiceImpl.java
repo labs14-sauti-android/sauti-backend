@@ -40,6 +40,7 @@ public class FavoriteRegulatedGoodSearchServiceImpl implements FavoriteRegulated
 
             favoriteRegulatedGoodSearchesSaving.add(new FavoriteRegulatedGoodSearch(
                     favoriteRegulatedGoodSearch.getCountry(),
+                    favoriteRegulatedGoodSearch.getTimestamp(),
                     user
             ));
         }

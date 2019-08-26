@@ -14,6 +14,7 @@ public class FavoriteRegulatedGoodSearch {
     private long favoriteRegulatedGoodSearchId;
 
     private String country;
+    private long timestamp;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -23,8 +24,9 @@ public class FavoriteRegulatedGoodSearch {
     public FavoriteRegulatedGoodSearch() {
     }
 
-    public FavoriteRegulatedGoodSearch(String country, User user) {
+    public FavoriteRegulatedGoodSearch(String country, long timestamp, User user) {
         this.country = country;
+        this.timestamp = timestamp;
         this.user = user;
     }
 
@@ -42,6 +44,14 @@ public class FavoriteRegulatedGoodSearch {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getUser() {

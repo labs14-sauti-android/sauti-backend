@@ -44,6 +44,7 @@ public class FavoriteTradeInfoSearchServiceImpl implements FavoriteTradeInfoSear
                     favoriteTradeInfoSearch.getOrigin(),
                     favoriteTradeInfoSearch.getDest(),
                     favoriteTradeInfoSearch.getValue(),
+                    favoriteTradeInfoSearch.getTimestamp(),
                     user
             ));
         }

@@ -16,6 +16,7 @@ public class FavoriteExchangeRateConversion {
     private String fromCurrency;
     private String toCurrency;
     private double value;
+    private long timestamp;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -25,10 +26,11 @@ public class FavoriteExchangeRateConversion {
     public FavoriteExchangeRateConversion() {
     }
 
-    public FavoriteExchangeRateConversion(String fromCurrency, String toCurrency, double value, User user) {
+    public FavoriteExchangeRateConversion(String fromCurrency, String toCurrency, double value, long timestamp, User user) {
         this.fromCurrency = fromCurrency;
         this.toCurrency = toCurrency;
         this.value = value;
+        this.timestamp = timestamp;
         this.user = user;
     }
 
@@ -62,6 +64,14 @@ public class FavoriteExchangeRateConversion {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getUser() {

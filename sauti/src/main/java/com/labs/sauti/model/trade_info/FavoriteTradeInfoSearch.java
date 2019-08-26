@@ -25,6 +25,7 @@ public class FavoriteTradeInfoSearch {
     private String origin;
     private String dest;
     private double value;
+    private long timestamp;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -34,13 +35,14 @@ public class FavoriteTradeInfoSearch {
     public FavoriteTradeInfoSearch() {
     }
 
-    public FavoriteTradeInfoSearch(String type, String productCat, String product, String origin, String dest, double value, User user) {
+    public FavoriteTradeInfoSearch(String type, String productCat, String product, String origin, String dest, double value, long timestamp, User user) {
         this.type = type;
         this.productCat = productCat;
         this.product = product;
         this.origin = origin;
         this.dest = dest;
         this.value = value;
+        this.timestamp = timestamp;
         this.user = user;
     }
 
@@ -98,6 +100,14 @@ public class FavoriteTradeInfoSearch {
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getUser() {

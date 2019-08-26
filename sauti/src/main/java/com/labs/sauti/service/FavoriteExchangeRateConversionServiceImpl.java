@@ -39,6 +39,7 @@ public class FavoriteExchangeRateConversionServiceImpl implements FavoriteExchan
                     favoriteExchangeRateConversion.getFromCurrency(),
                     favoriteExchangeRateConversion.getToCurrency(),
                     favoriteExchangeRateConversion.getValue(),
+                    favoriteExchangeRateConversion.getTimestamp(),
                     user
             ));
         }

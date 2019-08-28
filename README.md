@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend delpoyed at [Heroku](https://labs-sauti.herokuapp.com) <br>
+#### Backend deployed at [Heroku](https://labs-sauti.herokuapp.com) <br>
 
 ## Getting started
 

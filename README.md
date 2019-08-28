@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend delpoyed at [Heroku](labs-sauti.herokuapp.com) <br>
+#### Backend delpoyed at [Heroku](https://labs-sauti.herokuapp.com) <br>
 
 ## Getting started
 
@@ -26,7 +26,7 @@ To get the server running locally:
 
 ## Endpoints And Data Models
 
-#### The full documentation is at [Swagger Docs](labs-sauti.herokuapp.com/swagger-ui.html#/) <br>
+#### The full endpoints and data models documentation is at [Sauti Api Docs](https://labs-sauti.herokuapp.com/swagger-ui.html#/) <br>
 
 ## Environment Variables
 

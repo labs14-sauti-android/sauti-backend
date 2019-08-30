@@ -2,6 +2,13 @@
 
 #### Backend deployed at [Heroku](https://labs-sauti.herokuapp.com) <br>
 
+## Contributors
+
+
+|                                       [Israel Dela Cruz - Android And Backend Dev](https://github.com/kurochin143)                                        |
+| :-----------------------------------------------------------------------------------------------------------: |
+|                      [<img src="https://res.cloudinary.com/devfmbyvs/image/upload/v1562781329/Team/israel_jpk5jk.jpg" width = "200" />](https://github.com/)                       |
+
 ## Getting started
 
 To get the server running locally:
